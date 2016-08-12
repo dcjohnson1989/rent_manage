@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+      <dl>
+        <dt>Room:
+        <dd><input type=text size=30 name=room_id>
+        <dt>Price:
+        <dd><input type=text size=30 name=rent_price>
+        <dt>Date:
+        <dd><input type=text size=30 name=pay_date>
+        <dt>Water Fee:
+        <dd><input type=text size=30 name=water_fee>    
+        <dd><input type=submit value=Share>
+      </dl>
+    </form>
+  {% endif %}
+  <table>
+    <tr>
+      <th>Room</th>
+      <th>Price</th>
+      <th>date</th>
+      <th>wate fee</th>
+    </tr>
+  {% for rent in rents %}
+    <tr>
+      <td>{{ rent.room_id }}</td>
+      <td>{{ rent.rent_price }}</td>
+      <td>{{ rent.pay_date }}</td>
+      <td>{{ rent.water_fee }}</td>
+    </tr>
+  {% else %}
+    <tr>Unbelievable.  No entries here so far</tr>
+  {% endfor %}
+  </table>
+{% endblock %}
